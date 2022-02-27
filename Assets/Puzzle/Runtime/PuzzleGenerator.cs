@@ -59,7 +59,7 @@ public class PuzzleGenerator : MonoBehaviour
                 //Up part
                 if (ii - 1 > 0)
                 {
-                    if (!plugs.ContainsKey(PlugCode(parts[i][ii], parts[i][ii - 1])))
+                    if (!plugs.ContainsKey(parts[i][ii] + "" + parts[i][ii - 1]) && !plugs.ContainsKey(parts[i][ii - 1] + "" + parts[i][ii]))
                     {
                         int number = Random.Range(0, 2);
                         plugs.Add(parts[i][ii] + "" + parts[i][ii - 1], 1 - number == 1);
@@ -70,7 +70,7 @@ public class PuzzleGenerator : MonoBehaviour
                 //Down part
                 if (ii + 1 < parts[i].Count)
                 {
-                    if (!plugs.ContainsKey(PlugCode(parts[i][ii], parts[i][ii + 1])))
+                    if (!plugs.ContainsKey(parts[i][ii] + "" + parts[i][ii + 1]) && !plugs.ContainsKey(parts[i][ii + 1] + "" + parts[i][ii]))
                     {
                         int number = Random.Range(0, 2);
                         plugs.Add(parts[i][ii] + "" + parts[i][ii + 1], 1 - number == 1);
@@ -81,7 +81,7 @@ public class PuzzleGenerator : MonoBehaviour
                 //Left part
                 if (i - 1 > 0)
                 {
-                    if (!plugs.ContainsKey(PlugCode(parts[i][ii], parts[i - 1][ii])))
+                    if (!plugs.ContainsKey(parts[i][ii] + "" + parts[i - 1][ii]) || !plugs.ContainsKey(parts[i - 1][ii] + "" + parts[i][ii]))
                     {
                         int number = Random.Range(0, 2);
                         plugs.Add(parts[i][ii] + "" + parts[i - 1][ii], 1 - number == 1);
@@ -92,7 +92,7 @@ public class PuzzleGenerator : MonoBehaviour
                 //Right part
                 if (i + 1 < parts.Count)
                 {
-                    if (!plugs.ContainsKey(PlugCode(parts[i][ii], parts[i + 1][ii])))
+                    if (!plugs.ContainsKey(parts[i][ii] + "" + parts[i + 1][ii]) || !plugs.ContainsKey(parts[i + 1][ii] + "" + parts[i][ii]))
                     {
                         int number = Random.Range(0, 2);
                         plugs.Add(parts[i][ii] + "" + parts[i + 1][ii], 1 - number == 1);
