@@ -23,23 +23,9 @@ namespace Puzzle.UserData
                 cedula = cedulaInputField.text,
                 email = emailInputField.text,
                 ciudad = cityInputField.text,
-                scoreMin = 5,
                 scoreSeg = 5
             });
         }
 
-        [ContextMenu("Get users")]
-        public void Get()
-        {
-            ExampleUserModel.GETUsers(RequestUsersCallback);
-        }
-
-    public static void RequestUsersCallback(bool success, FirebaseListDto<UserDto> data)
-    {
-        Debug.Log($"Success: {success}");
-
-        if (success)
-            Debug.Log(JsonConvert.SerializeObject(data));
-    }
     }
 }

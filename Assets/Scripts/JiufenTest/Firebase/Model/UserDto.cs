@@ -10,6 +10,5 @@ public class UserDto
     public string cedula;
     public string email;
     public string ciudad;
-    public int scoreMin;
     public int scoreSeg;
 }
