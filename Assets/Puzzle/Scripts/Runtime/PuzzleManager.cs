@@ -30,9 +30,9 @@ public class PuzzleManager : MonoBehaviour
 
     public void OnReleasePiece(PuzzlePiece puzzlePiece)
     {
-        if (puzzlePiece.transform.position.x > pivotPoint1.position.x 
-            && puzzlePiece.transform.position.x < pivotPoint2.position.x 
-            && puzzlePiece.transform.position.y < pivotPoint1.position.y 
+        if (puzzlePiece.transform.position.x > pivotPoint1.position.x
+            && puzzlePiece.transform.position.x < pivotPoint2.position.x
+            && puzzlePiece.transform.position.y < pivotPoint1.position.y
             && puzzlePiece.transform.position.y > pivotPoint2.position.y)
         {
             CheckVictory();
@@ -44,8 +44,8 @@ public class PuzzleManager : MonoBehaviour
         for (int i = 0; i < puzzleParts.Count; i++)
         {
             puzzleParts[i].transform.position = new Vector2(
-                Random.Range(pivotPoint3.position.x,pivotPoint4.position.x),
-                Random.Range(pivotPoint3.position.y,pivotPoint4.position.y)
+                Random.Range(pivotPoint3.position.x, pivotPoint4.position.x),
+                Random.Range(pivotPoint3.position.y, pivotPoint4.position.y)
                 );
         }
     }
