@@ -30,7 +30,7 @@ public class PuzzleGenerator : MonoBehaviour
     [ContextMenu("SplitPuzzle")]
     public void SplitPuzzle()
     {
-        int cutCount = 4;
+        int cutCount = 5;
         int newTextureSize = sourceImage.texture.width / cutCount;
         slicedParts = CreateSplitArray(cutCount);
         for (int i = 0; i < slicedParts.Count; i++)

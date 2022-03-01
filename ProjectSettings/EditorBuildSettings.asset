@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main.unity
+    path: Assets/Puzzle/Scenes/Main.unity
     guid: ea8991cfd5b5f7d48b66bbfde35a101b
   - enabled: 1
     path: Assets/Scenes/Despedida.unity
