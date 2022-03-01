@@ -7,7 +7,7 @@ public class ExampleMaxScoreModel : MonoBehaviour
     private const string baseUrl = "https://puzzlebatman-default-rtdb.firebaseio.com/MaxScore";
     public void GetMaxScore()
     {
-        FirebaseRequest.FirebaseObjectRequestPetiton<int>(baseUrl,
+        FirebaseRequest.FirebaseObjectRequestPetiton<int>(baseUrl,null,
             null,
             (success, maxScore) =>
             {
@@ -19,7 +19,7 @@ public class ExampleMaxScoreModel : MonoBehaviour
     [ContextMenu("SetMaxScore")]
     public void SetMaxScore()
     {
-        FirebaseRequest.FirebaseObjectRequestPetiton<MaxScorePayload>(baseUrl,
+        FirebaseRequest.FirebaseObjectRequestPetiton<MaxScorePayload>(baseUrl,null,
             new MaxScorePayload(){MaxScore = 3 },
             (success, maxScore) =>
             {
@@ -30,7 +30,7 @@ public class ExampleMaxScoreModel : MonoBehaviour
 
     public void DeleteMaxScore()
     {
-        FirebaseRequest.FirebaseObjectRequestPetiton<int>(baseUrl,
+        FirebaseRequest.FirebaseObjectRequestPetiton<int>(baseUrl,null,
             null,
             (success, maxScore) =>
             {

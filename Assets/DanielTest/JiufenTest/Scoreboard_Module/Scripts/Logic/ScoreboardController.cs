@@ -20,7 +20,7 @@ namespace Puzzle.Scoreboard
 
         private void InitializeTable()
         {
-            ExampleUserModel.GETUsers(RequestUsersCallback);
+            UserModel.GETUsers(RequestUsersCallback);
         }
 
         public void RequestUsersCallback(bool success, FirebaseListDto<UserDto> data)

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -16,7 +15,7 @@ namespace Puzzle.UserData
 
         public void SubmitForm()
         {
-            ExampleUserModel.SENDNewUser(new UserDto()
+            UserModel.SENDNewUser(new UserDto()
             {
                 nombre = nameInputField.text,
                 apellido = lastNameInputField.text,

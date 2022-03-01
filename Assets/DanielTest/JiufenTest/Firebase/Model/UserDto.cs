@@ -11,4 +11,5 @@ public class UserDto
     public string email;
     public string ciudad;
     public int scoreSeg;
+    public string error;
 }
