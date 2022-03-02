@@ -11,8 +11,8 @@ public class PuzzleManager : MonoBehaviour
 
     bool firstMovement = true;
     bool isGameRuning;
-    float startTime;
-    float endTime;
+    public float startTime;
+    public float endTime;
 
     void Start()
     {
@@ -81,6 +81,13 @@ public class PuzzleManager : MonoBehaviour
                 return;
             }
         }
+        endTime = Time.time;
+        isGameRuning = false;
+        Debug.Log("Ganaste");
+    }
+
+    public void ForceVictory()
+    {
         endTime = Time.time;
         isGameRuning = false;
         Debug.Log("Ganaste");

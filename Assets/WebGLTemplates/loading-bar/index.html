@@ -141,7 +141,20 @@
         }
         userAction();
       }
-      
+	  
+	  function SetUser( data,  authToken) {
+        const userAction2 = async () => {
+          const response = await fetch('https://puzzlebatman-default-rtdb.firebaseio.com/Users.json'+ '?auth=' + authToken, {
+            method: 'POST',
+			 headers: {
+			  'Content-Type': 'application/json'
+			},
+			body: data
+          });
+        }
+        userAction2();
+      }
+	  
     </script>
   </body>
 </html>

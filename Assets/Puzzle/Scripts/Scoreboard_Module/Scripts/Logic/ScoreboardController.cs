@@ -73,7 +73,7 @@ namespace Puzzle.Scoreboard
             foreach (var user in data)
             {
                 RowScoreboardController row = Instantiate(scoreRowPrefab, scoreboardTable);
-                row.Init($"{user.nombre} {user.apellido}", GiveTimeFormatter(user.scoreSeg), counter.ToString(), counter == 1);
+                row.Init($"{user.nombre} {user.apellido}", GiveTimeFormatter((int)user.scoreSeg), counter.ToString(), counter == 1);
                 counter++;
             }
             Debug.Log(JsonConvert.SerializeObject(data));

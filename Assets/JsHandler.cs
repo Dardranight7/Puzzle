@@ -8,7 +8,7 @@ using Puzzle.Scoreboard;
 public class JsHandler : MonoBehaviour
 {
     [DllImport("__Internal")]
-    private static extern void PostResults(string str);
+    private static extern void PostResults(string str, string str2);
 
     [DllImport("__Internal")]
     private static extern void GetUser();
@@ -20,14 +20,13 @@ public class JsHandler : MonoBehaviour
         scoreboardController = FindObjectOfType<ScoreboardController>(true);
     }
 
-    public void EnviarDatos(string tiempo = "100")
+    public void EnviarDatos(string datos = "", string authToken = "")
     {
 #if UNITY_EDITOR
         Debug.Log("Gano");
         return;
 #endif
-        //{\"puntaje\":\"100\"}
-        PostResults(tiempo);
+        PostResults(datos, authToken);
     }
 
     public void TomarDatos()

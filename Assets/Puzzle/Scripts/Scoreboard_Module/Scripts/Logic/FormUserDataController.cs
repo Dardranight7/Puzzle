@@ -28,6 +28,7 @@ namespace Puzzle.UserData
         [Header("Labels")]
         [SerializeField] private TMP_Text errorMessage;
 
+        [SerializeField] JsHandler jsHandler;
         public void SubmitForm()
         {
             if (!toggleTyC.isOn || !toggleDataTreatment)
@@ -48,22 +49,23 @@ namespace Puzzle.UserData
                 return;
             }
 
-            UserModel.SENDNewUser(new UserDto()
+            UserDto userData = new UserDto()
             {
                 nombre = nameInputField.text,
                 apellido = lastNameInputField.text,
                 cedula = cedulaInputField.text,
                 email = emailInputField.text,
                 ciudad = cityInputField.text,
-                scoreSeg = 5
-            }, () =>
-             {
-                 StartCoroutine(WaitForSeconds(0.5f, () =>
-                 {
-                     scoreBoardPanel.gameObject.SetActive(true);
-                     this.gameObject.SetActive(false);
-                 }));
-             });
+                scoreSeg = puzzleManager.startTime - puzzleManager.endTime
+            };
+
+            jsHandler.EnviarDatos(JsonConvert.SerializeObject(userData), FirebaseTokenManager.instance.tokenFirebase);
+
+            StartCoroutine(WaitForSeconds(0.8f, () =>
+            {
+                scoreBoardPanel.gameObject.SetActive(true);
+                this.gameObject.SetActive(false);
+            }));
         }
 
         IEnumerator WaitForSeconds(float seconds, Action callback)
