@@ -37,7 +37,6 @@ namespace Puzzle.UserData
             if (Time.time > initTimeTokenFirebase + tokenExpirationTime)
             {
                 StartCoroutine(RequestTokenFirebase());
-                Debug.Log("Reset Firebase Token");
                 initTimeTokenFirebase = Time.time;
             }
         }
@@ -85,7 +84,6 @@ namespace Puzzle.UserData
             }
             catch (Exception ex)
             {
-                Debug.Log("Error: key: " + key + " , input: " + input);
                 StartCoroutine(RequestTokenFirebase());
                 return "";
             }
