@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PuzzlePiece : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class PuzzlePiece : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IEndDragHandler
 {
     Image selfImage;
     bool isDragging = false;
@@ -33,14 +33,9 @@ public class PuzzlePiece : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         }
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        
-    }
-
     public void OnEndDrag(PointerEventData eventData)
     {
-        
+        OnPointerUp(eventData);
     }
 
     public void SetRaycast(bool state)
