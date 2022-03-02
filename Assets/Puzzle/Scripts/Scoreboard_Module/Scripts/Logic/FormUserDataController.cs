@@ -56,7 +56,7 @@ namespace Puzzle.UserData
                 cedula = cedulaInputField.text,
                 email = emailInputField.text,
                 ciudad = cityInputField.text,
-                scoreSeg = puzzleManager.startTime - puzzleManager.endTime
+                scoreSeg = puzzleManager.endTime - puzzleManager.startTime
             };
 
             jsHandler.EnviarDatos(JsonConvert.SerializeObject(userData), FirebaseTokenManager.instance.tokenFirebase);
