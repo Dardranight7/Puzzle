@@ -76,7 +76,6 @@ namespace Puzzle.Scoreboard
                 row.Init($"{user.nombre} {user.apellido}", GiveTimeFormatter((int)user.scoreSeg), counter.ToString(), counter == 1);
                 counter++;
             }
-            Debug.Log(JsonConvert.SerializeObject(data));
         }
 
         public string GiveTimeFormatter(int scoreSeg)
