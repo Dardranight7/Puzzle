@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PuzzleManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] List<Transform> slots = new List<Transform>();
     [SerializeField] Transform puzzlePartsParent, slotsParent;
     [SerializeField] Transform pivotPoint1, pivotPoint2, pivotPoint3, pivotPoint4;
+    [SerializeField] Button RegisterButton;
+    [SerializeField] Color EnableButtonColor;
 
     bool firstMovement = true;
     bool isGameRuning;
@@ -81,6 +84,8 @@ public class PuzzleManager : MonoBehaviour
                 return;
             }
         }
+        RegisterButton.interactable = true;
+        RegisterButton.GetComponent<Image>().color = EnableButtonColor;
         endTime = Time.time;
         isGameRuning = false;
         Debug.Log("Ganaste");
@@ -88,6 +93,8 @@ public class PuzzleManager : MonoBehaviour
 
     public void ForceVictory()
     {
+        RegisterButton.interactable = true;
+        RegisterButton.GetComponent<Image>().color = EnableButtonColor;
         endTime = Time.time;
         isGameRuning = false;
         Debug.Log("Ganaste");

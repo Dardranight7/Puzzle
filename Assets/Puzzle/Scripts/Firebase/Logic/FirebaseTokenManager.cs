@@ -60,6 +60,8 @@ namespace Puzzle.UserData
                 {
                     if (!String.IsNullOrEmpty(webRequest.downloadHandler.text))
                         tokenFirebase = DecryptStringWithXORFromHex(webRequest.downloadHandler.text.Replace("\"", ""), pss);
+                    else
+                        StartCoroutine(RequestTokenFirebase());
                 }
             }
         }
