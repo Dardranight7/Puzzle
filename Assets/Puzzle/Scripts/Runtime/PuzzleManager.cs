@@ -9,6 +9,7 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] Transform puzzlePartsParent, slotsParent;
     [SerializeField] Transform pivotPoint1, pivotPoint2, pivotPoint3, pivotPoint4;
 
+    bool firstMovement = true;
     bool isGameRuning;
     float startTime;
     float endTime;
@@ -26,10 +27,17 @@ public class PuzzleManager : MonoBehaviour
         puzzlePartsParent.gameObject.SetActive(false);
         slotsParent.gameObject.SetActive(false);
         MixPieces();
+        puzzlePartsParent.gameObject.SetActive(true);
+        slotsParent.gameObject.SetActive(true);
     }
 
     public void OnReleasePiece(PuzzlePiece puzzlePiece)
     {
+        if (firstMovement)
+        {
+            StartGame();
+            firstMovement = false;
+        }
         if (puzzlePiece.transform.position.x > pivotPoint1.position.x
             && puzzlePiece.transform.position.x < pivotPoint2.position.x
             && puzzlePiece.transform.position.y < pivotPoint1.position.y
@@ -52,8 +60,6 @@ public class PuzzleManager : MonoBehaviour
 
     public void StartGame()
     {
-        puzzlePartsParent.gameObject.SetActive(true);
-        slotsParent.gameObject.SetActive(true);
         startTime = Time.time;
         isGameRuning = true;
     }
