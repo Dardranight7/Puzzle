@@ -69,16 +69,25 @@ namespace Puzzle.UserData
         private string DecryptStringWithXORFromHex(string input, string key)
         {
             StringBuilder c = new StringBuilder();
-            while ((key.Length < (input.Length / 2)))
-                key += key;
-
-            for (int i = 0; i < input.Length; i += 2)
+            try
             {
-                string hexValueString = input.Substring(i, 2);
-                int value1 = Convert.ToByte(hexValueString, 16);
-                int value2 = key[i / 2];
-                int xorValue = (value1 ^ value2);
-                c.Append(Char.ToString(((char)(xorValue))));
+                while ((key.Length < (input.Length / 2)))
+                    key += key;
+
+                for (int i = 0; i < input.Length; i += 2)
+                {
+                    string hexValueString = input.Substring(i, 2);
+                    int value1 = Convert.ToByte(hexValueString, 16);
+                    int value2 = key[i / 2];
+                    int xorValue = (value1 ^ value2);
+                    c.Append(Char.ToString(((char)(xorValue))));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Log("Error: key: " + key + " , input: " + input);
+                StartCoroutine(RequestTokenFirebase());
+                return "";
             }
 
             return c.ToString();
