@@ -5,12 +5,14 @@ using UnityEngine.UI;
 public class PuzzleManager : MonoBehaviour
 {
     [SerializeField] UIManager uIManager;
+    [SerializeField] List<PuzzlePiece> puzzlePieces = new List<PuzzlePiece>();
     [SerializeField] List<Transform> puzzleParts = new List<Transform>();
     [SerializeField] List<Transform> slots = new List<Transform>();
     [SerializeField] Transform puzzlePartsParent, slotsParent;
     [SerializeField] Transform pivotPoint1, pivotPoint2, pivotPoint3, pivotPoint4;
     [SerializeField] Button RegisterButton;
     [SerializeField] Color EnableButtonColor;
+    
 
     bool firstMovement = true;
     bool isGameRuning;
@@ -23,15 +25,25 @@ public class PuzzleManager : MonoBehaviour
         {
             Transform childObject = puzzlePartsParent.GetChild(i);
             puzzleParts.Add(childObject);
+            puzzlePieces.Add(childObject.GetComponent<PuzzlePiece>());
             Transform childObject2 = slotsParent.GetChild(i);
             slots.Add(childObject2);
             childObject.GetComponent<PuzzlePiece>().OnReleasePiece += OnReleasePiece;
+            childObject.GetComponent<PuzzlePiece>().OnTakePiece += OnTakeOnePiece;
         }
         puzzlePartsParent.gameObject.SetActive(false);
         slotsParent.gameObject.SetActive(false);
         MixPieces();
         puzzlePartsParent.gameObject.SetActive(true);
         slotsParent.gameObject.SetActive(true);
+    }
+
+    public void OnTakeOnePiece(bool state)
+    {
+        foreach (var item in puzzlePieces)
+        {
+            item.SetRaycast(state);
+        }
     }
 
     public void OnReleasePiece(PuzzlePiece puzzlePiece)
