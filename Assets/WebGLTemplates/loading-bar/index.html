@@ -127,23 +127,12 @@
       resize_canvas();
     </script>
     <script>
-      var url_string = window.location;
-      var url = new URL(url_string);
-      var userId = url.searchParams.get("userId");
-      var eventId = url.searchParams.get("eventId");
 
-      function PostResults(time){
-        var customUrl = "https://api.evius.co/api/events/" + eventId + "/eventusers/" + userId;
-        fetch(customUrl,{method:'PUT',
-                          body: JSON.stringify({
-                            score: time,
-                          })
-                        }); 
-      }
+      //var url_string = window.location;
+      //var url = new URL(url_string);
+      //var userId = url.searchParams.get("userId");
+      //var eventId = url.searchParams.get("eventId");
 
-      function GetUser(){
-        return userId;
-      }
     </script>
   </body>
 </html>
