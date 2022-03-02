@@ -12,7 +12,7 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] Transform pivotPoint1, pivotPoint2, pivotPoint3, pivotPoint4;
     [SerializeField] Button RegisterButton;
     [SerializeField] Color EnableButtonColor;
-    
+
 
     bool firstMovement = true;
     bool isGameRuning;
@@ -83,9 +83,37 @@ public class PuzzleManager : MonoBehaviour
     {
         if (isGameRuning)
         {
-            uIManager.SetTimeText((Time.time - startTime).ToString("00:00"));
+            uIManager.SetTimeText(GiveTimeFormatter((int)(Time.time - startTime)));
         }
     }
+        public string GiveTimeFormatter(int scoreSeg)
+        {
+            string finalString = "";
+            if (scoreSeg < 60)
+            {
+                if (scoreSeg < 10)
+                    finalString = $"00:0{scoreSeg}";
+                else
+                    finalString = $"00:{scoreSeg}";
+            }
+            else if (scoreSeg < 3600)
+            {
+                int scoreMin = scoreSeg / 60;
+                int restSeg = scoreSeg % 60;
+
+                if (scoreMin < 10)
+                    finalString += $"0{scoreMin}";
+                else
+                    finalString += $"{scoreMin}";
+
+                if (restSeg < 10)
+                    finalString += $":0{restSeg}";
+                else
+                    finalString += $":{restSeg}";
+            }
+
+            return finalString;
+        }
 
     public void CheckVictory()
     {

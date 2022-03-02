@@ -99,7 +99,7 @@ namespace Puzzle.Scoreboard
                 else
                     finalString += $"0:{scoreMin}";
 
-                if (scoreSeg < 10)
+                if (restSeg < 10)
                     finalString += $":0{restSeg}";
                 else
                     finalString += $":{restSeg}";
@@ -120,7 +120,7 @@ namespace Puzzle.Scoreboard
                 else
                     finalString += $":{scoreMin}";
 
-                if (scoreSeg < 10)
+                if (restSeg < 10)
                     finalString += $":0{restSeg}";
                 else
                     finalString += $":{restSeg}";
