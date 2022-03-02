@@ -21,19 +21,48 @@ namespace Puzzle.Scoreboard
 
         private void InitializeTable()
         {
-            //UserModel.GETUsers(RequestUsersCallback);
             jsHandler.TomarDatos();
         }
 
         public void ReceiveUserDataFromOut(string data)
         {
-            //RequestUsersCallback(JsonConvert.DeserializeObject<List<UserDto>>(data));
-            //string incomingJson = data.Split()
-            var atun = JsonConvert.DeserializeObject<List<object>>(data);
-            foreach (var item in atun)
+            RequestUsersCallback(MyOwnParser(data));
+            
+        }
+
+        public List<UserDto> MyOwnParser(string data)
+        {
+            List<UserDto> UserDtos = new List<UserDto>();
+            List<string> Objects = new List<string>();
+            int keysCounter = -1;
+            string currentText = "";
+            foreach (var character in data)
             {
-                Debug.Log(item);
+                if (keysCounter == -1)
+                {
+                    keysCounter++;
+                    continue;
+                }
+                if (character == '{' || character == '}')
+                {
+                    keysCounter++;
+                }
+                if (keysCounter > 0)
+                {
+                    currentText += character;
+                }
+                if (keysCounter > 1)
+                {
+                    Objects.Add(currentText);
+                    keysCounter = -1;
+                    currentText = "";
+                }
             }
+            foreach (var Object in Objects)
+            {
+                UserDtos.Add(JsonConvert.DeserializeObject<UserDto>(Object));
+            }
+            return UserDtos;
         }
 
         public void RequestUsersCallback(List<UserDto> data)
