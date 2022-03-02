@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PuzzlePiece : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IEndDragHandler
+public class PuzzlePiece : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     Image selfImage;
     bool isDragging = false;
@@ -33,11 +33,6 @@ public class PuzzlePiece : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         }
     }
 
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        OnPointerUp(eventData);
-    }
-
     public void SetRaycast(bool state)
     {
         selfImage.raycastTarget = state;
@@ -57,11 +52,13 @@ public class PuzzlePiece : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         if (isDragging)
         {
             GameObject onReleaseObject = eventData.pointerCurrentRaycast.gameObject;
-            if (onReleaseObject.CompareTag("Slot"))
+            if (onReleaseObject != null)
             {
-                transform.position = onReleaseObject.transform.position;
+                if (onReleaseObject.CompareTag("Slot"))
+                {
+                    transform.position = onReleaseObject.transform.position;
+                }
             }
-            selfImage.raycastTarget = true;
             OnTakePiece.Invoke(true);
             OnReleasePiece.Invoke(this);
         }
