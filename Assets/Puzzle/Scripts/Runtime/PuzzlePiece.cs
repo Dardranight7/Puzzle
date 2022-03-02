@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PuzzlePiece : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class PuzzlePiece : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     Image selfImage;
     bool isDragging = false;
@@ -18,54 +18,46 @@ public class PuzzlePiece : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         selfImage = GetComponent<Image>();
     }
 
-    private void LateUpdate()
-    {
-        if (isDragging)
-        {
-            if (Input.touchCount > 0)
-            {
-                transform.position = Input.touches[0].position + offset;
-            }
-            else
-            {
-                transform.position = Input.mousePosition + new Vector3(offset.x,offset.y);
-            }
-        }
-    }
-
     public void SetRaycast(bool state)
     {
         selfImage.raycastTarget = state;
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnBeginDrag(PointerEventData eventData)
     {
         offset.x = transform.position.x - eventData.position.x;
         offset.y = transform.position.y - eventData.position.y;
         transform.SetAsLastSibling();
         OnTakePiece.Invoke(false);
-        isDragging = true;
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    public void OnDrag(PointerEventData eventData)
     {
-        if (isDragging)
+        if (Input.touchCount > 0)
         {
-            OnTakePiece.Invoke(true);
-            OnReleasePiece.Invoke(this);
-            GameObject onReleaseObject = eventData.pointerCurrentRaycast.gameObject;
-            try
+            transform.position = Input.touches[0].position + offset;
+        }
+        else
+        {
+            transform.position = Input.mousePosition + new Vector3(offset.x, offset.y);
+        }
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        OnTakePiece.Invoke(true);
+        OnReleasePiece.Invoke(this);
+        GameObject onReleaseObject = eventData.pointerCurrentRaycast.gameObject;
+        try
+        {
+            if (onReleaseObject != null)
             {
-                if (onReleaseObject != null)
+                if (onReleaseObject.CompareTag("Slot"))
                 {
-                    if (onReleaseObject.CompareTag("Slot"))
-                    {
-                        transform.position = onReleaseObject.transform.position;
-                    }
+                    transform.position = onReleaseObject.transform.position;
                 }
             }
-            catch { }
         }
-        isDragging = false;
+        catch { }
     }
 }
