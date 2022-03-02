@@ -7,6 +7,7 @@ public static class UserModel
 
     public static void GETUsers(Action<bool, FirebaseListDto<UserDto>> callback)
     {
+        Debug.Log("im here");
         FirebaseRequest.FirebaseListRequestPetiton<UserDto>(baseUrl, _callback: callback, _type: RequestType.GET);
     }
 

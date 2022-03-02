@@ -10,6 +10,7 @@ namespace Puzzle.Scoreboard
     {
         [SerializeField] private Transform scoreboardTable;
         [SerializeField] private RowScoreboardController scoreRowPrefab;
+        [SerializeField] JsHandler jsHandler;
         public void OnEnable()
         {
             foreach (Transform child in scoreboardTable)
@@ -20,24 +21,33 @@ namespace Puzzle.Scoreboard
 
         private void InitializeTable()
         {
-            UserModel.GETUsers(RequestUsersCallback);
+            //UserModel.GETUsers(RequestUsersCallback);
+            jsHandler.TomarDatos();
         }
 
-        public void RequestUsersCallback(bool success, FirebaseListDto<UserDto> data)
+        public void ReceiveUserDataFromOut(string data)
         {
-            if (success)
+            //RequestUsersCallback(JsonConvert.DeserializeObject<List<UserDto>>(data));
+            //string incomingJson = data.Split()
+            var atun = JsonConvert.DeserializeObject<List<object>>(data);
+            foreach (var item in atun)
             {
-                int counter = 1;
-                data.List.Sort(CompareSort);
-
-                foreach (var user in data.List)
-                {
-                    RowScoreboardController row = Instantiate(scoreRowPrefab, scoreboardTable);
-                    row.Init($"{user.nombre} {user.apellido}", GiveTimeFormatter(user.scoreSeg), counter.ToString(), counter == 1);
-                    counter++;
-                }
-                Debug.Log(JsonConvert.SerializeObject(data));
+                Debug.Log(item);
             }
+        }
+
+        public void RequestUsersCallback(List<UserDto> data)
+        {
+            int counter = 1;
+            data.Sort(CompareSort);
+
+            foreach (var user in data)
+            {
+                RowScoreboardController row = Instantiate(scoreRowPrefab, scoreboardTable);
+                row.Init($"{user.nombre} {user.apellido}", GiveTimeFormatter(user.scoreSeg), counter.ToString(), counter == 1);
+                counter++;
+            }
+            Debug.Log(JsonConvert.SerializeObject(data));
         }
 
         public string GiveTimeFormatter(int scoreSeg)

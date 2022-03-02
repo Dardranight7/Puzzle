@@ -31,7 +31,7 @@ namespace Puzzle.UserData
             StartCoroutine(RequestTokenFirebase());
         }
 
-        private string pss = "8a,p6x?uEfG!(Q^n";
+        private string pss = "8a,p6?uEfG!(Q^n";
         private void Update()
         {
             if (Time.time > initTimeTokenFirebase + tokenExpirationTime)
@@ -46,6 +46,11 @@ namespace Puzzle.UserData
         {
             using (UnityWebRequest webRequest = UnityWebRequest.Get("https://pzzl-bat-ps.netlify.app/.netlify/functions/api"))
             {
+                webRequest.SetRequestHeader("Access-Control-Allow-Credentials", "true");
+                webRequest.SetRequestHeader("Access-Control-Allow-Headers", "Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time");
+                webRequest.SetRequestHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+                webRequest.SetRequestHeader("Access-Control-Allow-Origin", "*");
+                webRequest.SetRequestHeader("X-Requested-With", "https://arjs-cors-proxy.herokuapp.com/");
                 yield return webRequest.SendWebRequest();
                 if (webRequest.isNetworkError)
                 {

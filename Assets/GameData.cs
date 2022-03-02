@@ -33,8 +33,8 @@ public class GameData : MonoBehaviour
 
     void Start()
     {
-        GameData.gameData.jsHandler = FindObjectOfType<JsHandler>();
-        Debug.Log(JsonUtility.ToJson(usuario));
+        //GameData.gameData.jsHandler = FindObjectOfType<JsHandler>();
+        //Debug.Log(JsonUtility.ToJson(usuario));
     }
 
     public void CargarFromJson(string data)

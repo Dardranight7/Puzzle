@@ -127,12 +127,20 @@
       resize_canvas();
     </script>
     <script>
-
-      //var url_string = window.location;
-      //var url = new URL(url_string);
-      //var userId = url.searchParams.get("userId");
-      //var eventId = url.searchParams.get("eventId");
-
+      
+      function GetUser() {
+        const userAction = async () => {
+          const response = await fetch('https://puzzlebatman-default-rtdb.firebaseio.com/Users.json', {
+            method: 'GET'
+          });
+          const myJson = await response.text(); //extract JSON from the http response
+          // do something with myJson
+          console.log(myJson);
+          unityInstance.SendMessage('Scoreboard_Panel', 'ReceiveUserDataFromOut', myJson);
+        }
+        userAction();
+      }
+      GetUser();
     </script>
   </body>
 </html>
