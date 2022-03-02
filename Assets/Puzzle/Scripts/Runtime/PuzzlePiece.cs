@@ -51,18 +51,21 @@ public class PuzzlePiece : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         if (isDragging)
         {
-            GameObject onReleaseObject = eventData.pointerCurrentRaycast.gameObject;
-            if (onReleaseObject != null)
-            {
-                if (onReleaseObject.CompareTag("Slot"))
-                {
-                    transform.position = onReleaseObject.transform.position;
-                }
-            }
             OnTakePiece.Invoke(true);
             OnReleasePiece.Invoke(this);
+            GameObject onReleaseObject = eventData.pointerCurrentRaycast.gameObject;
+            try
+            {
+                if (onReleaseObject != null)
+                {
+                    if (onReleaseObject.CompareTag("Slot"))
+                    {
+                        transform.position = onReleaseObject.transform.position;
+                    }
+                }
+            }
+            catch { }
         }
-
         isDragging = false;
     }
 }
